@@ -8,10 +8,10 @@ const connect_DB = require('./connectDB/connectDB');
 const app = express();
 
 app.use(cors({
-  origin: ['*'], 
+  origin: ['https://register-app-td8y.vercel.app/']|| 'http://localhost:5173/', 
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
-  credentials: true
+  credentials: false
 }));
 
 app.use(morgan("dev"));

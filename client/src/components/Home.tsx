@@ -13,7 +13,7 @@ interface SignupFormData {
 }
 
 export default function Home() {
-  const [loading, setLoading] = useState(null)
+  // const [loading, setLoading] = useState(null)
   const [formData, setFormData] = useState<SignupFormData>({
     FirstName: "",
     LastName: "",

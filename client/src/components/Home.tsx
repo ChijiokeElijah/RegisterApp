@@ -13,6 +13,7 @@ interface SignupFormData {
 }
 
 export default function Home() {
+  const [loading, setLoading] = useState(null)
   const [formData, setFormData] = useState<SignupFormData>({
     FirstName: "",
     LastName: "",
@@ -29,7 +30,7 @@ export default function Home() {
       if (formData.email === formData.ConfirmEmail) {
         await axios.post(
           // "http://localhost:3000/user/register", 
-          "https://register-server-production.up.railway.app/user/register",
+          "https://server-x-rust.vercel.app/user/register",
           formData,
           {
             headers: {

@@ -13,7 +13,7 @@ interface SignupFormData {
 }
 
 export default function Home() {
-  // const [loading, setLoading] = useState(null)
+  const [loading, setLoading] = useState(false)
   const [formData, setFormData] = useState<SignupFormData>({
     FirstName: "",
     LastName: "",
@@ -26,11 +26,12 @@ export default function Home() {
     formData.email === formData.ConfirmEmail || formData.ConfirmEmail === "";
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true)
     try {
       if (formData.email === formData.ConfirmEmail) {
         await axios.post(
           // "http://localhost:3000/user/register", 
-          "https://server-x-rust.vercel.app/user/register",
+          "https://register-server-production.up.railway.app/user/register",
           formData,
           {
             headers: {
@@ -49,7 +50,16 @@ export default function Home() {
       } else {
         toast.error("An unexpected error occurred");
       }
+      
     }
+    setLoading(false)
+    setFormData({
+      FirstName: "",
+      LastName: "",
+      email: "",
+      ConfirmEmail: "",
+      RegNum: "",
+    })
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,7 +67,7 @@ export default function Home() {
 
   return (
     <div className="flex items-center justify-center sm:h-[595px]">
-      <section className="bg-gray-100 w-[1200px] p-8 rounded shadow-md justify-center items-center sm:h-screen">
+      <section className="bg-gray-100 w-[1200px] p-8 sm:mt-20 rounded shadow-md justify-center items-center sm:h-screen">
         <div className="flex flex-col-reverse sm:flex-row gap-3 sm:h-[400px] sm:w-[900px] sm:mx-28 sm:mt-10">
           <div className=" md:flex-2">
             <h1 className="text-2xl font-bold mb-3 text-center">
@@ -136,8 +146,11 @@ export default function Home() {
                 <button
                   type="submit"
                   className="text-white text-2xl cursor-pointer rounded w-[100%] sm:w-[35%] h-12 sm:m-1"
+                  disabled={loading}
                 >
-                  Register
+                 
+    Register
+  
                 </button>
               </div>
             </form>

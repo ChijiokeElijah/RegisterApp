@@ -3,6 +3,9 @@ import "../App.css";
 import axios from "axios";
 import toast from "react-hot-toast";
 import photo from "../images/photo.JPG";
+import spinner from "../images/spinner.svg";
+
+
 
 interface SignupFormData {
   FirstName: string;
@@ -143,15 +146,16 @@ export default function Home() {
                 </div>
               </div>
               <div className="flex flex-start">
+                {loading? (
+                  <img src={spinner} alt="loading" className="bg-transparent fixed md:left-150 left-20 right-5 bottom-0 top-15 z-50"/> ) 
+                  :
                 <button
                   type="submit"
                   className="text-white text-2xl cursor-pointer rounded w-[100%] sm:w-[35%] h-12 sm:m-1"
                   disabled={loading}
-                >
-                 
-    Register
-  
-                </button>
+                > Register
+
+                </button>}
               </div>
             </form>
             <hr className="mt-6 sm:mt-4 sm:m-1" />
